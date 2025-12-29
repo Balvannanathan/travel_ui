@@ -41,6 +41,24 @@ mixin _$LoginScreenModel on _LoginScreenModelBase, Store {
     });
   }
 
+  late final _$isNextButtonEnabledAtom = Atom(
+    name: '_LoginScreenModelBase.isNextButtonEnabled',
+    context: context,
+  );
+
+  @override
+  bool get isNextButtonEnabled {
+    _$isNextButtonEnabledAtom.reportRead();
+    return super.isNextButtonEnabled;
+  }
+
+  @override
+  set isNextButtonEnabled(bool value) {
+    _$isNextButtonEnabledAtom.reportWrite(value, super.isNextButtonEnabled, () {
+      super.isNextButtonEnabled = value;
+    });
+  }
+
   late final _$_LoginScreenModelBaseActionController = ActionController(
     name: '_LoginScreenModelBase',
     context: context,
@@ -71,10 +89,23 @@ mixin _$LoginScreenModel on _LoginScreenModelBase, Store {
   }
 
   @override
+  void setIsNextButtonEnabled(bool value) {
+    final _$actionInfo = _$_LoginScreenModelBaseActionController.startAction(
+      name: '_LoginScreenModelBase.setIsNextButtonEnabled',
+    );
+    try {
+      return super.setIsNextButtonEnabled(value);
+    } finally {
+      _$_LoginScreenModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isPasswordShown: ${isPasswordShown},
-isRemeberMe: ${isRemeberMe}
+isRemeberMe: ${isRemeberMe},
+isNextButtonEnabled: ${isNextButtonEnabled}
     ''';
   }
 }

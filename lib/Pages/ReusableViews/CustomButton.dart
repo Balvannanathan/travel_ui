@@ -5,8 +5,14 @@ import 'package:nimmy_app/Helpers/Resources/Styles.dart';
 class CustomButton extends StatelessWidget {
   final String buttonText;
   final Function? onTap;
+  final bool? isIconRequired;
 
-  const CustomButton({super.key, required this.buttonText, this.onTap});
+  const CustomButton({
+    super.key,
+    required this.buttonText,
+    this.isIconRequired,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +35,12 @@ class CustomButton extends StatelessWidget {
           children: [
             Text(buttonText, style: Styles.customButtonText),
             SizedBox(width: 3.w),
-            Icon(
-              Icons.arrow_forward_ios_rounded,
-              size: 25.sp,
-              color: AppColors.primaryWhite,
-            ),
+            if (isIconRequired ?? true)
+              Icon(
+                Icons.arrow_forward_ios_rounded,
+                size: 25.sp,
+                color: AppColors.primaryWhite,
+              ),
           ],
         ),
       ),

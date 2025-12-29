@@ -22,10 +22,10 @@ abstract class _LoginScreenModelBase with Store, NavigationMixin {
   }
 
   @observable
-  String emailErrorText = '';
+  bool isNextButtonEnabled = false;
 
   @action
-  void setEmailErrorText(String value) {
-    emailErrorText = value;
+  void setIsNextButtonEnabled(bool value) {
+    isNextButtonEnabled = value;
   }
 }

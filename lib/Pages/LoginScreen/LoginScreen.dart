@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nimmy_app/Helpers/Resources/ResponsiveUI.dart';
 import 'package:nimmy_app/Helpers/Resources/Styles.dart';
 import 'package:nimmy_app/Pages/LoginScreen/LoginScreenVM.dart';
 import 'package:nimmy_app/Pages/ReusableViews/CustomButton.dart';
-import 'package:nimmy_app/Pages/ReusableViews/LoginTextField.dart';
+import 'package:nimmy_app/Pages/ReusableViews/CustomTextField.dart';
 import 'package:nimmy_app/Pages/ReusableViews/TextInputFormatters.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -62,9 +61,15 @@ class _LoginScreen extends State<LoginScreen> {
                       ),
                       SizedBox(height: 107.h),
 
-                      LoginTextField(
+                      CustomTextField(
                         hintText: 'Enter your email',
                         textController: emailController,
+                        onChangeFunction: (value) {
+                          _loginScreenVM.updateIsNextButtonEnabled(
+                            passwordController.text.isNotEmpty &&
+                                emailController.text.isNotEmpty,
+                          );
+                        },
                         maxLength: 255,
                         validatorFunction: (value) {
                           return _loginScreenVM.emailValidator(value);
@@ -75,11 +80,17 @@ class _LoginScreen extends State<LoginScreen> {
 
                       SizedBox(height: 12.h),
 
-                      LoginTextField(
+                      CustomTextField(
                         hintText: 'Password',
-                        isPassword: _loginScreenVM.isPasswordShown,
+                        isPassword: !_loginScreenVM.isPasswordShown,
                         maxLength: 8,
                         inputFormatter: [PasswordInputFormatter()],
+                        onChangeFunction: (value) {
+                          _loginScreenVM.updateIsNextButtonEnabled(
+                            passwordController.text.isNotEmpty &&
+                                emailController.text.isNotEmpty,
+                          );
+                        },
                         suffixIconFuncion: () {
                           _loginScreenVM.updateIsPasswordShown();
                         },
@@ -109,9 +120,7 @@ class _LoginScreen extends State<LoginScreen> {
 
                       CustomButton(
                         buttonText: 'Next',
-                        onTap:
-                            emailController.text.isNotEmpty &&
-                                passwordController.text.isNotEmpty
+                        onTap: _loginScreenVM.isNextButtonEnabled
                             ? () {
                                 formKey.currentState!.validate();
                               }
