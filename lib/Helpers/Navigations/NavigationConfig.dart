@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nimmy_app/Pages/ForgetPasswordScreen/ForgetPasswordScreen.dart';
+import 'package:nimmy_app/Pages/HomeScreen/HomeScreen.dart';
 import 'package:nimmy_app/Pages/LoginScreen/LoginScreen.dart';
 import 'package:nimmy_app/Pages/OnboardingScreen/OnboardingScreen.dart';
 import 'package:nimmy_app/Pages/SignupScreen/SignUpScreen.dart';
@@ -15,6 +16,7 @@ enum AppScreen {
   OnboardingScreeen,
   SignupScreen,
   ForgetPasswordScreen,
+  HomeScreen
 }
 
 /// ============================
@@ -58,5 +60,10 @@ class NavigationConfig {
   static var forget = ScreenConfig(
     screen: AppScreen.ForgetPasswordScreen,
     builder: (_) => ForgetPasswordScreen(),
+  );
+
+  static var home = ScreenConfig(
+    screen: AppScreen.HomeScreen,
+    builder: (_) => HomeScreen(),
   );
 }

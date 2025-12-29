@@ -9,6 +9,7 @@ class AppColors {
   static const Color checkBoxGrey = Color(0xffCBCBCB);
   static const Color primaryRed = Color(0xffFF3951);
   static const Color secondaryRed = Color(0xffFF7686);
+  static const Color pinputBackground = Color(0xffC4C4C4);
 }
 
 class Styles {
@@ -55,6 +56,13 @@ class Styles {
   static TextStyle get loginTitle => _base(
     fontFamily: "MulishExtraBold",
     fontSize: 24,
+    fontWeight: FontWeight.bold,
+    color: AppColors.secondaryBlack,
+  );
+
+  static TextStyle get signUpTitle => _base(
+    fontFamily: "MulishExtraBold",
+    fontSize: 36,
     fontWeight: FontWeight.bold,
     color: AppColors.secondaryBlack,
   );

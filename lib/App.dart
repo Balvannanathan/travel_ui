@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'Nimmy App',
       navigatorKey: NavigationHelper.navigatorKey,
       onGenerateRoute: (settings) => MaterialPageRoute(
-        builder: (_) => NavigationConfig.login.builder(null),
+        builder: (_) => NavigationConfig.splash.builder(null),
       ),
       debugShowCheckedModeBanner: false,
     );

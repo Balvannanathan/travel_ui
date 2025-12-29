@@ -67,3 +67,47 @@ class PasswordInputFormatter extends TextInputFormatter {
     return newValue;
   }
 }
+
+class FullNameInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    String text = newValue.text;
+
+    // Allow only letters and spaces
+    text = text.replaceAll(RegExp(r'[^a-zA-Z ]'), '');
+
+    // Remove leading spaces
+    text = text.replaceAll(RegExp(r'^ +'), '');
+
+    // Replace multiple spaces with single space
+    text = text.replaceAll(RegExp(r' +'), ' ');
+
+    return TextEditingValue(
+      text: text,
+      selection: TextSelection.collapsed(offset: text.length),
+    );
+  }
+}
+
+class MobileNumberInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    String digitsOnly = newValue.text.replaceAll(RegExp(r'\D'), '');
+
+    // Limit to 10 digits
+    if (digitsOnly.length > 10) {
+      digitsOnly = digitsOnly.substring(0, 10);
+    }
+
+    return TextEditingValue(
+      text: digitsOnly,
+      selection: TextSelection.collapsed(offset: digitsOnly.length),
+    );
+  }
+}

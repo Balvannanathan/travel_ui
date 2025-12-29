@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
     _splashScreeVM = SplashScreenVM();
 
     Future.delayed(Duration(seconds: 3), () {
-      _splashScreeVM.navigateToLoginScreen();
+      _splashScreeVM.getLocalStorage();
     });
   }
 

@@ -17,9 +17,25 @@ class LoginScreenVM extends LoginScreenModel {
     return null;
   }
 
+  String? passwordValidator(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Password is required';
+    }
+
+    final passwordRegex = RegExp(
+      r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$',
+    );
+
+    if (!passwordRegex.hasMatch(value.trim())) {
+      return 'Enter a valid password';
+    }
+
+    return null;
+  }
+
   void navigateToSignUpScreen() {
     try {
-      push(NavigationConfig.signup);
+      pushReplace(NavigationConfig.signup);
     } catch (ex) {
       print(ex);
     }
@@ -41,9 +57,9 @@ class LoginScreenVM extends LoginScreenModel {
     }
   }
 
-  void updateEmailErrorText(String value) {
+  void updateIsNextButtonEnabled(bool value) {
     try {
-      setEmailErrorText(value);
+      setIsNextButtonEnabled(value);
     } catch (ex) {
       print(ex);
     }

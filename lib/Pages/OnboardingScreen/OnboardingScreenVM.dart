@@ -1,4 +1,5 @@
 import 'package:nimmy_app/Helpers/Navigations/NavigationConfig.dart';
+import 'package:nimmy_app/Helpers/Utility/ErrorHandling.dart';
 import 'package:nimmy_app/Pages/OnboardingScreen/OnboardingScreenModel.dart';
 
 class OnboardingScreenVM extends OnboardingScreenModel {
@@ -26,7 +27,7 @@ class OnboardingScreenVM extends OnboardingScreenModel {
 
   void updateCurrentIndex(int index) {
     try {
-      (index > 2) ? navigateToLogin() : setCurrentPageIndex(index);
+      (index > 2) ? storeOnboardingDetail() : setCurrentPageIndex(index);
     } catch (ex) {
       print(ex);
     }
@@ -37,6 +38,18 @@ class OnboardingScreenVM extends OnboardingScreenModel {
       pushReplace(NavigationConfig.login);
     } catch (ex) {
       print(ex);
+    }
+  }
+
+  Future<void> storeOnboardingDetail() async {
+    try {
+      await platformLocalStorageService.addData('isFirstTime', true).then((
+        value,
+      ) {
+        navigateToLogin();
+      });
+    } on Exception catch (ex) {
+      ex.logException();
     }
   }
 }
