@@ -1,16 +1,50 @@
-# nimmy_app
+# Flutter Firebase Authentication (Email & Password)
 
-A new Flutter project.
+A Flutter sample application demonstrating **Firebase Authentication using Email & Password**, built with a clean **MVVM architecture** and best practices for authentication, session handling, and security.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## ✨ Features
 
-A few resources to get you started if this is your first Flutter project:
+- Email & Password Sign Up
+- Email & Password Sign In
+- Persistent Login Session
+- Firebase Automatic Token Refresh
+- Secure Logout
+- Delete User Account
+- MVVM Architecture
+- Dependency Injection (GetIt)
+- Centralized Error Logging
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🛠 Tech Stack
+
+- **Flutter**
+- **Firebase Authentication**
+- **Firebase Core**
+- **GetIt** (Dependency Injection)
+- **MVVM Architecture**
+- **SharedPreferences** (Non-auth data only)
+
+---
+
+## 🔐 Authentication Flow
+
+### Email & Password Authentication
+- Users can sign up using email & password
+- Firebase generates and manages secure tokens automatically
+- No credentials are stored locally
+
+### Persistent Login
+- Firebase securely stores the refresh token
+- User remains logged in even after:
+  - App restart
+  - Device restart
+- Session expires only when:
+  - User logs out
+  - Password is reset
+  - Account is disabled or deleted
+  - App is uninstalled
+
+---

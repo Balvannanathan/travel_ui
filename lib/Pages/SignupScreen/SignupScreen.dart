@@ -161,7 +161,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         onTap: _signupScreenVM.isNextButtonEnabled
                             ? () {
                                 if (formKey.currentState!.validate()) {
-                                  print('Valid');
+                                  _signupScreenVM.createNewUser();
                                 }
                               }
                             : null,

@@ -59,6 +59,24 @@ mixin _$LoginScreenModel on _LoginScreenModelBase, Store {
     });
   }
 
+  late final _$loginErrorTextAtom = Atom(
+    name: '_LoginScreenModelBase.loginErrorText',
+    context: context,
+  );
+
+  @override
+  String get loginErrorText {
+    _$loginErrorTextAtom.reportRead();
+    return super.loginErrorText;
+  }
+
+  @override
+  set loginErrorText(String value) {
+    _$loginErrorTextAtom.reportWrite(value, super.loginErrorText, () {
+      super.loginErrorText = value;
+    });
+  }
+
   late final _$_LoginScreenModelBaseActionController = ActionController(
     name: '_LoginScreenModelBase',
     context: context,
@@ -101,11 +119,24 @@ mixin _$LoginScreenModel on _LoginScreenModelBase, Store {
   }
 
   @override
+  void setLoginErrorText(String value) {
+    final _$actionInfo = _$_LoginScreenModelBaseActionController.startAction(
+      name: '_LoginScreenModelBase.setLoginErrorText',
+    );
+    try {
+      return super.setLoginErrorText(value);
+    } finally {
+      _$_LoginScreenModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isPasswordShown: ${isPasswordShown},
 isRemeberMe: ${isRemeberMe},
-isNextButtonEnabled: ${isNextButtonEnabled}
+isNextButtonEnabled: ${isNextButtonEnabled},
+loginErrorText: ${loginErrorText}
     ''';
   }
 }
