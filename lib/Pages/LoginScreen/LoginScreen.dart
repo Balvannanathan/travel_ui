@@ -61,6 +61,16 @@ class _LoginScreen extends State<LoginScreen> {
                       ),
                       SizedBox(height: 107.h),
 
+                      Visibility(
+                        visible: _loginScreenVM.loginErrorText.isNotEmpty,
+                        child: Text(
+                          _loginScreenVM.loginErrorText,
+                          style: Styles.textField.copyWith(
+                            color: AppColors.primaryRed,
+                          ),
+                        ),
+                      ),
+
                       CustomTextField(
                         hintText: 'Enter your email',
                         textController: emailController,
@@ -113,7 +123,10 @@ class _LoginScreen extends State<LoginScreen> {
 
                       SizedBox(height: 14.h),
 
-                      _otherOptionsRow(context),
+                      Visibility(
+                        visible: false,
+                        child: _otherOptionsRow(context),
+                      ),
 
                       // Spacer(),
                       SizedBox(height: 190.h),
@@ -122,7 +135,12 @@ class _LoginScreen extends State<LoginScreen> {
                         buttonText: 'Next',
                         onTap: _loginScreenVM.isNextButtonEnabled
                             ? () {
-                                formKey.currentState!.validate();
+                                if (formKey.currentState!.validate()) {
+                                  _loginScreenVM.loginUser(
+                                    emailController.text,
+                                    passwordController.text,
+                                  );
+                                }
                               }
                             : null,
                       ),
@@ -155,12 +173,16 @@ class _LoginScreen extends State<LoginScreen> {
           color: AppColors.primaryBlack,
         ),
         Spacer(),
-        GestureDetector(
-          onTap: () => _loginScreenVM.navigateToForgetPasswordScreen(),
-          child: _optionsText(
-            context: context,
-            text: 'Forget password ?',
-            color: AppColors.primaryRed,
+        Visibility(
+          visible: false,
+          // _loginScreenVM.loginErrorText.isNotEmpty,
+          child: GestureDetector(
+            onTap: () => _loginScreenVM.navigateToForgetPasswordScreen(),
+            child: _optionsText(
+              context: context,
+              text: 'Forget password ?',
+              color: AppColors.primaryRed,
+            ),
           ),
         ),
       ],

@@ -1,4 +1,6 @@
+import 'package:nimmy_app/BOs/LoginBO/LoginBO.dart';
 import 'package:nimmy_app/Helpers/Navigations/NavigationConfig.dart';
+import 'package:nimmy_app/Helpers/Utility/ErrorHandling.dart';
 import 'package:nimmy_app/Pages/SignupScreen/SignupScreenModel.dart';
 
 class SignupScreenVM extends SignupScreenModel {
@@ -31,6 +33,28 @@ class SignupScreenVM extends SignupScreenModel {
     }
 
     return null;
+  }
+
+  Future<void> createNewUser() async {
+    try {
+      var result = await firebaseAuthService.signupUser(
+        LoginBO(email: emailAddress, password: password),
+      );
+
+      if (result != null && result.isNotEmpty) {
+        navigateToHomeScreen();
+      }
+    } on Exception catch (ex) {
+      ex.logException();
+    }
+  }
+
+  void navigateToHomeScreen() {
+    try {
+      pushReplace(NavigationConfig.home);
+    } on Exception catch (ex) {
+      ex.logException();
+    }
   }
 
   void validateFields() {
