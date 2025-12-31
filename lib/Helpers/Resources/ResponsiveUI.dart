@@ -1,21 +1,25 @@
+import 'package:flutter/material.dart';
+
 class ResponsiveUI {
   static late double _scaleWidth;
   static late double _scaleHeight;
   static late double _scaleText;
 
   /// Match with your Figma design
-  static const double figmaWidth = 375;
-  static const double figmaHeight = 812;
+  static late double screenWidth;
+  static late double screenHeight;
 
-  ResponsiveUI({
-    required double screenWidth,
-    required double screenHeight,
+  ResponsiveUI(
+    BuildContext context, {
+    required double figmaWidth,
+    required double figmaHeight,
   }) {
+    screenWidth = MediaQuery.of(context).size.width;
+    screenHeight = MediaQuery.of(context).size.height;
+
     _scaleWidth = screenWidth / figmaWidth;
     _scaleHeight = screenHeight / figmaHeight;
-    _scaleText = _scaleWidth < _scaleHeight
-        ? _scaleWidth
-        : _scaleHeight;
+    _scaleText = _scaleWidth < _scaleHeight ? _scaleWidth : _scaleHeight;
   }
 }
 
