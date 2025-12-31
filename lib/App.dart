@@ -11,8 +11,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ResponsiveUI(
-      screenWidth: Appconstants.baseWidth,
-      screenHeight: Appconstants.baseHeight,
+      context,
+      figmaWidth: Appconstants.baseWidth,
+      figmaHeight: Appconstants.baseHeight,
     );
 
     return MaterialApp(
